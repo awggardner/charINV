@@ -11,6 +11,7 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO INCREMENT
 	private int id;
 
+	//empty constructor
 	public Inventory() {
 		super();
 	}
