@@ -2,14 +2,23 @@ package com.qa.char_inv.data.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "inventory")
+@Entity // specifies class is an entity
+@Table(name = "inventory") // specifies primary table for entity and names it
 public class Inventory {
 	
-	@Id
+	@Id // Primary Key
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO INCREMENT
 	private int id;
+
+	public Inventory() {
+		super();
+	}
+
+	public Inventory(int id) {
+		super();
+		this.id = id;
+	}
 	
 	
 
