@@ -1,7 +1,7 @@
-package com.qa.char_inv.entity;
+package com.qa.char_inv.data.entity;
 
-import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "character")
@@ -22,8 +22,15 @@ public class Character {
     @Max(value = 2000, message = "Age should not be greater than 2000")
     private int age;
 	
+	@NotNull
+	@NotBlank
+	@Max(value = 20)
+	private String genderIdentity;
 	
-	
+	@NotNull
+	@NotBlank
+	@Max(value = 20, message = "Choose a species for your character, ie. human, elf, dwarf etc. Feel free to make up your own as long as it's less than 20 characters long")
+	private String species;
 	
 
 }
