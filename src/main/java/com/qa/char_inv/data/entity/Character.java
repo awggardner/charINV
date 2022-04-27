@@ -1,4 +1,4 @@
-package com.qa.char_inv.entity;
+package com.qa.char_inv.data.entity;
 
 import javax.validation.constraints.*;
 import javax.persistence.*;
