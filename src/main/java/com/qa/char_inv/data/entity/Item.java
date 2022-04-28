@@ -1,6 +1,11 @@
 package com.qa.char_inv.data.entity;
 
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity // specifies class is an entity
@@ -26,6 +31,10 @@ public class Item {
 	@NotBlank
 	@Max(value = 20, message = "If item is magic 'true' if not 'false'")
 	private boolean isMagic;
+	
+	@ManyToMany(mappedBy = "items", fetch = FetchType.EAGER)
+	@JsonIgnore
+	private List<Inventory> inventory;
 
 	
 	//empty constructor
