@@ -57,6 +57,46 @@ public class Item {
 		this.description = description;
 		this.isMagic = isMagic;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getItemName() {
+		return itemName;
+	}
+
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public boolean isMagic() {
+		return isMagic;
+	}
+
+
+	public void setMagic(boolean isMagic) {
+		this.isMagic = isMagic;
+	}
 	
 	
 	
