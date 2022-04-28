@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity // specifies class is an entity
 @Table(name = "inventory") // specifies primary table for entity and names it
 public class Inventory {
@@ -19,6 +21,13 @@ public class Inventory {
 	           joinColumns = @JoinColumn(name = "inventory_id", referencedColumnName = "id"), // name of the key of the domain which owns the relationship
 	           inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id")) // inverse of above
 	private List<Item> items;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "character_id") 
+	@JsonIgnore 
+	
+	
+	private Character character;
 	
 	
 	protected Inventory() {
@@ -48,6 +57,17 @@ public class Inventory {
 		this.items = items;
 	}
 
+	public Character getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(Character character) {
+		this.character = character;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
 
 	@Override
 	public String toString() {

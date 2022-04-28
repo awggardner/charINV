@@ -1,6 +1,10 @@
 package com.qa.char_inv.data.entity;
 
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import javax.persistence.*;
 
 @Entity
@@ -63,6 +67,73 @@ public class Character {
 		this.age = age;
 		this.genderIdentity = genderIdentity;
 		this.species = species;
+	}
+	
+	@OneToOne(mappedBy = "inventory", // mappedBy is the name of the field in UserProfile representing the other side of the relationship
+			  optional = false, // is the relationship optional
+			  cascade = {CascadeType.ALL}, // cascade is used to cascade operations, for example if I delete a user, their user profile will also be automatically deleted
+			  targetEntity = Inventory.class, // the type of the class on the other side of the relationship
+			  fetch = FetchType.EAGER)
+	@JsonProperty(access = Access.READ_WRITE)
+	private Inventory inventory;
+	
+	// fetch says how data should be retrieved from the database
+	// - EAGER fetching means the data will be retrieved immediately
+	// - LAZY fetching means the data will only be requested when it is needed/used
+	
+	// @OneToMany signifies a one to many relationship between user and posts where User is the 
+	// parent of the relationship. Post owns the relationship as it stores the id of the user
+	// - mappedBy signifies the name of the field in Post.class which owns the relationship
+	// - targetEntity specifies the class that is being mapped
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getGenderIdentity() {
+		return genderIdentity;
+	}
+
+	public void setGenderIdentity(String genderIdentity) {
+		this.genderIdentity = genderIdentity;
+	}
+
+	public String getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(String species) {
+		this.species = species;
+	}
+
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 
 	@Override
