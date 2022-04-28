@@ -106,6 +106,10 @@ public class Item {
 	public void setMagic(boolean isMagic) {
 		this.isMagic = isMagic;
 	}
+	
+	public List<Inventory> getInventory() {
+		return inventory;
+	}
 
 
 	@Override
