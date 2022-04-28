@@ -112,6 +112,11 @@ public class Item {
 	}
 
 
+	public void setInventory(List<Inventory> inventory) {
+		this.inventory = inventory;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", itemName=" + itemName + ", description=" + description + ", isMagic=" + isMagic
