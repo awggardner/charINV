@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qa.char_inv.data.entity.Inventory;
 
 @RestController
-@RequestMapping(path = "/user") // accepts requests at localhost:8080/user
+@RequestMapping(path = "/character") // accepts requests at localhost:8090/character
 public class CharacterControl {
 	
 	private CharacterService characterService;
@@ -52,7 +52,7 @@ public class CharacterControl {
 		Character newCharacter = characterService.create(character);
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", "http://localhost:8080/user/" + newCharacter.getId());
+		headers.add("Location", "http://localhost:8090/character/" + newCharacter.getId());
 
 		return new ResponseEntity<Character>(newCharacter, headers, HttpStatus.CREATED);
 	}
