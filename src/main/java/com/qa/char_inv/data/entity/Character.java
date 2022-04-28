@@ -38,7 +38,7 @@ public class Character {
 		super();
 	}
 
-	// all args constructor
+	// full args constructor
 	public Character(int id,
 			@NotNull @NotBlank @Size(min = 3, max = 20, message = "please insert a character name between 3 and 20 characters long") String name,
 			@NotEmpty @Min(value = 18, message = "Age should be no less than 18") @Max(value = 2000, message = "Age should not be greater than 2000") int age,
