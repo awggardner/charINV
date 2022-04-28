@@ -1,3 +1,5 @@
+package com.qa.char_inv.controllers;
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -39,7 +41,7 @@ public class CharacterControl {
 		return new ResponseEntity<Character>(character, HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/{id}/posts")
+	@GetMapping(path = "/{id}/inventory")
 	public ResponseEntity<Inventory> getCharacterInventory(@PathVariable(name = "id") int characterId) {
 		<Inventory> inventory = characterService.readInventoryByCharacterId(characterId);
 		return ResponseEntity.ok(inventory);
