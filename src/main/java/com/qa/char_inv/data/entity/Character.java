@@ -64,6 +64,12 @@ public class Character {
 		this.genderIdentity = genderIdentity;
 		this.species = species;
 	}
+
+	@Override
+	public String toString() {
+		return "Character [id=" + id + ", name=" + name + ", age=" + age + ", genderIdentity=" + genderIdentity
+				+ ", species=" + species + "]";
+	}
 	
 	
 	

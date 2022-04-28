@@ -106,6 +106,13 @@ public class Item {
 	public void setMagic(boolean isMagic) {
 		this.isMagic = isMagic;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", itemName=" + itemName + ", description=" + description + ", isMagic=" + isMagic
+				+ ", inventory=" + inventory + "]";
+	}
 	
 	
 	
