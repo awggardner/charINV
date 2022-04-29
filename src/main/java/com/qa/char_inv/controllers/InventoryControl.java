@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.char_inv.data.entity.Inventory;
+import com.qa.char_inv.service.InventoryService;
 
 @RestController
 @RequestMapping(path = "/user") // accepts requests at localhost:8080/user

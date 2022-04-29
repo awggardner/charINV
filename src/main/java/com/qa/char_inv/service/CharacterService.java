@@ -21,10 +21,12 @@ public class CharacterService {
 		this.characterRepo = characterRepo;
 	}
 	
+	// read all
 	public List<Character> readAll() {
 		return characterRepo.findAll();
 	}
 	
+	// read by id
 	public Character readById(int id) {
 		Optional<Character> character = characterRepo.findById(id);
 		
@@ -34,11 +36,13 @@ public class CharacterService {
 		throw new EntityNotFoundException("Character with id " + id + " was not found");
 	}
 	
+	// read inventory by character id
 	public Inventory readInventoryByCharacterId(int id) {
 		Character character = this.readById(id);
 		return character.getInventory();
 	}
 	
+	// create character
 	public Character create(Character character) {
 		return characterRepo.save(character);
 	}

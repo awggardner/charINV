@@ -32,11 +32,13 @@ public class CharacterControl {
 	}
 	
 	@GetMapping
+	// read all
 	public ResponseEntity<List<Character>> getCharacters() {
 		return ResponseEntity.ok(characterService.readAll());
 	}
 	
 	@GetMapping(path = "/{id}")
+	// read by id
 	public ResponseEntity<Character> getCharacter(@PathVariable(name = "id") int id) {
 		Character character = characterService.readById(id);
 		return new ResponseEntity<Character>(character, HttpStatus.OK);
@@ -44,6 +46,7 @@ public class CharacterControl {
 	
 	
 	@PostMapping
+	// create
 	public ResponseEntity<Character> createCharacter(@Valid @RequestBody Character character) {
 		Character newCharacter = characterService.create(character);
 		
@@ -54,6 +57,7 @@ public class CharacterControl {
 	}
 	
 	@PutMapping(path = "/{id}")
+	// update
 	public ResponseEntity<Character> updateCharacter(@RequestBody Character character, @PathVariable(name = "id") int id) {
 		
 		return null;
