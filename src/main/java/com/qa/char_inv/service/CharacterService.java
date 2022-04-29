@@ -6,19 +6,17 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.data.entity.Inventory;
 import com.qa.char_inv.data.repository.CharacterRepo;
 
-@Service // specialisation of @Component, registers this class as a bean
+@Service
 public class CharacterService {
 
 	private CharacterRepo characterRepo;
 	
-	@Autowired // Instructs the Spring IoC container to inject the required dependency
+	@Autowired 
 	public CharacterService(CharacterRepo characterRepo) {
 		this.characterRepo = characterRepo;
 	}

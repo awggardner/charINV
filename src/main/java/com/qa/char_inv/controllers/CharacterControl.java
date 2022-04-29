@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.char_inv.data.entity.Inventory;
+import com.qa.char_inv.data.entity.Character;
+import com.qa.char_inv.service.CharacterService;
 
 @RestController
 @RequestMapping(path = "/character") // accepts requests at localhost:8090/character
@@ -41,11 +42,6 @@ public class CharacterControl {
 		return new ResponseEntity<Character>(character, HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/{id}/inventory")
-	public ResponseEntity<Inventory> getCharacterInventory(@PathVariable(name = "id") int characterId) {
-		<Inventory> inventory = characterService.readInventoryByCharacterId(characterId);
-		return ResponseEntity.ok(inventory);
-	}
 	
 	@PostMapping
 	public ResponseEntity<Character> createCharacter(@Valid @RequestBody Character character) {
@@ -58,8 +54,8 @@ public class CharacterControl {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Character> updateUser(@RequestBody Character character, @PathVariable(name = "id") int id) {
-		// TODO: Put your implementation here
+	public ResponseEntity<Character> updateCharacter(@RequestBody Character character, @PathVariable(name = "id") int id) {
+		
 		return null;
 	}
 	
