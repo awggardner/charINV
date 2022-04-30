@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.char_inv.data.dto.CharacterDTO;
 import com.qa.char_inv.data.dto.NewCharacterDTO;
-import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.service.CharacterService;
 
 @RestController
@@ -70,7 +69,8 @@ public class CharacterControl {
 	@DeleteMapping(path = "/{id}")
 	// delete
 	public ResponseEntity<?> deleteCharacter(@PathVariable(name = "id") int id) {
-		// TODO: Put your implementation here
-		return null;
+		CharacterDTO characterDeleted = characterService.getCharacter(id);
+		characterService.deleteCharacter(id);
+		return ResponseEntity.ok(characterDeleted);
 	}
 }
