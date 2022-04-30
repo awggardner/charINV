@@ -2,6 +2,8 @@ package com.qa.char_inv.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
@@ -49,6 +51,15 @@ public class InventoryService {
 			return inventoriesDTO;
 	}
 	
+	// read inventory by id
+	public InventoryDTO getInventory(int id) {
+		Optional<Inventory> inventory = inventoryRepo.findById(id);
+			if (inventory.isPresent()) {
+				return this.toDTO(inventory.get());
+			}
+			throw new EntityNotFoundException("We can't find this inventory...");
+	}
+	
 	// read inventory by character id
 	public List<InventoryDTO> getInventoryByCharacterId(int id) {
 		List<Inventory> characterInventory = inventoryRepo.findByCharacterId(id);
@@ -57,7 +68,7 @@ public class InventoryService {
 				characterInventoryDTO.add(this.toDTO(inventory));
 				return characterInventoryDTO;
 		}
-			throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they are away on another adventure");
+			throw new EntityNotFoundException("We can't find this...");
 	}
 	
 

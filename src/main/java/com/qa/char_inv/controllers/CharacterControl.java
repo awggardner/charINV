@@ -1,5 +1,6 @@
 package com.qa.char_inv.controllers;
 
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.char_inv.data.dto.CharacterDTO;
+import com.qa.char_inv.data.dto.InventoryDTO;
 import com.qa.char_inv.data.dto.NewCharacterDTO;
 import com.qa.char_inv.service.CharacterService;
 
@@ -34,22 +36,8 @@ public class CharacterControl {
 		this.characterService = characterService;
 	}
 	
-	@GetMapping
-	// read all
-	public ResponseEntity<List<CharacterDTO>> getCharacters() {
-		return ResponseEntity.ok(characterService.getCharacters());
-	}
-	
-	@GetMapping(path = "/{id}")
-	// read by id
-	public ResponseEntity<CharacterDTO> getCharacter(@PathVariable(name = "id") int id) {
-		CharacterDTO character = characterService.getCharacter(id);
-		return new ResponseEntity<>(character, HttpStatus.OK);
-	}
-	
-	
 	@PostMapping
-	// create
+	// create character
 	public ResponseEntity<CharacterDTO> createCharacter(@Valid @RequestBody NewCharacterDTO character) {
 		CharacterDTO newCharacter = characterService.createCharacter(character);
 		
@@ -58,6 +46,12 @@ public class CharacterControl {
 
 		return new ResponseEntity<>(newCharacter, headers, HttpStatus.CREATED);
 	}
+	
+	// read all characters
+			@GetMapping
+			public ResponseEntity<List<CharacterDTO>> getCharacter() {
+				return ResponseEntity.ok(characterService.getCharacter());
+			}
 	
 	@PutMapping(path = "/{id}")
 	// update
