@@ -98,7 +98,7 @@ public class Item {
 	}
 
 
-	public boolean isMagic() {
+	public boolean getMagic() {
 		return isMagic;
 	}
 

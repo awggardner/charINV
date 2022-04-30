@@ -100,7 +100,7 @@ public class ItemDTO {
 	}
 
 
-	public boolean isMagic() {
+	public boolean getMagic() {
 		return isMagic;
 	}
 
