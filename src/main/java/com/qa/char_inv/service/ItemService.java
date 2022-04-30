@@ -61,8 +61,17 @@ public class ItemService {
 			throw new EntityNotFoundException("We can't find Item with id " + id + ", did you drop it?");
 		}
 		
+		// read by inventory id
+		public List<ItemDTO> getItemsByInventoryId(int id) {
+			List<Item> items = itemRepo.findByInventoryId(id);
+			List<ItemDTO> inventoryItems = new ArrayList<>();
+				for (Item item : items) {
+					inventoryItems.add(this.toDTO(item));
+					return inventoryItems;
+				}
+				throw new EntityNotFoundException("This inventory seems to be empty");
+		}
 		
-
 		
 		// update item
 		public ItemDTO updateItem(NewItemDTO item, int id) {
