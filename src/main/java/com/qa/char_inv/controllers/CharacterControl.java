@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.char_inv.data.dto.CharacterDTO;
+import com.qa.char_inv.data.dto.NewCharacterDTO;
 import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.service.CharacterService;
 
@@ -50,20 +51,20 @@ public class CharacterControl {
 	
 	@PostMapping
 	// create
-	public ResponseEntity<Character> createCharacter(@Valid @RequestBody Character character) {
-		Character newCharacter = characterService.create(character);
+	public ResponseEntity<CharacterDTO> createCharacter(@Valid @RequestBody NewCharacterDTO character) {
+		CharacterDTO newCharacter = characterService.createCharacter(character);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Location", "http://localhost:8090/character/" + newCharacter.getId());
 
-		return new ResponseEntity<Character>(newCharacter, headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(newCharacter, headers, HttpStatus.CREATED);
 	}
 	
 	@PutMapping(path = "/{id}")
 	// update
-	public ResponseEntity<Character> updateCharacter(@RequestBody Character character, @PathVariable(name = "id") int id) {
+	public ResponseEntity<CharacterDTO> updateCharacter(@RequestBody NewCharacterDTO character, @PathVariable(name = "id") int id) {
 		
-		return null;
+		return ResponseEntity.ok(characterService.updateCharacter(character, id));
 	}
 	
 	@DeleteMapping(path = "/{id}")
