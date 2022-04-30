@@ -237,6 +237,12 @@ public class Inventory implements List<Inventory> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	public void setCharacter(java.lang.Character character2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

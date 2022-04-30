@@ -62,10 +62,22 @@ public class InventoryService {
 	
 
 	// update inventory
-	public InventoryDTO updateInventory(NewInventoryDTO inventory, int id) {
-		return null;
-		
+//	public InventoryDTO updateInventory(NewInventoryDTO inventory, int id) {
+//		if (inventoryRepo.existsById(id)) {
+//			Inventory oldInventory = inventoryRepo.getById(id);
+//			oldInventory.setCharacter(inventory.getCharacter());
+//			
+//		}
+//		return null;
+//		
+//	}
+	
+	//delete inventory
+	public void deleteInventory(int id) {
+		if (inventoryRepo.existsById(id)) {
+			inventoryRepo.deleteById(id);
+		}
+		throw new EntityNotFoundException("We can't find Inventory with id " + id + ", perhaps it has been stolen by a sneaky thief!");
 	}
-
 	
 }
