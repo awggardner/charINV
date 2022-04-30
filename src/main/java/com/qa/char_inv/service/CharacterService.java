@@ -1,12 +1,17 @@
 package com.qa.char_inv.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.qa.char_inv.data.dto.CharacterDTO;
+import com.qa.char_inv.data.dto.NewCharacterDTO;
 import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.data.entity.Inventory;
 import com.qa.char_inv.data.repository.CharacterRepo;
@@ -15,10 +20,26 @@ import com.qa.char_inv.data.repository.CharacterRepo;
 public class CharacterService {
 
 	private CharacterRepo characterRepo;
+	private ModelMapper modelMapper;
 	
 	@Autowired 
-	public CharacterService(CharacterRepo characterRepo) {
+	public CharacterService(CharacterRepo characterRepo, ModelMapper modelMapper, InventoryService inventoryService) {
+		super();
 		this.characterRepo = characterRepo;
+		this.modelMapper = modelMapper;
+		
+	}
+	
+	// Character toDTO
+	private CharacterDTO toDTO(Character character) {
+		return this.modelMapper.map(character, CharacterDTO.class);
+	}
+	
+	// create character
+	public CharacterDTO createCharacter(NewCharacterDTO character) {
+		Character create = this.modelMapper.map(character,  Character.class);
+		Character newCharacter = characterRepo.save(create);
+		return this.toDTO(newCharacter);
 	}
 	
 	// read all
@@ -26,25 +47,54 @@ public class CharacterService {
 		return characterRepo.findAll();
 	}
 	
+	//
+	public List<CharacterDTO> getCharacters() {
+		List<Character> characters = characterRepo.findAll();
+		List<CharacterDTO> charactersDTO = new ArrayList<>();
+			for (Character character: characters) {
+				charactersDTO.add(this.toDTO(character));
+			}
+			return charactersDTO;
+	}
+	
 	// read by id
-	public Character readById(int id) {
+	public CharacterDTO getCharacter(int id) {
 		Optional<Character> character = characterRepo.findById(id);
 		
 		if (character.isPresent()) {
-			return character.get();
+			return this.toDTO(character.get());
 		}
-		throw new EntityNotFoundException("Character with id " + id + " was not found");
+		throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they are away on another adventure");
 	}
 	
 	// read inventory by character id
-	public Inventory readInventoryByCharacterId(int id) {
-		Character character = this.readById(id);
-		return character.getInventory();
+//	public Inventory readInventoryByCharacterId(int id) {
+//		Character character = this.readById(id);
+//		return character.getInventory();
+//	}
+//	
+
+	
+	// update character
+	public CharacterDTO updateCharacter(NewCharacterDTO character, int id) {
+		if (characterRepo.existsById(id)) {
+			Character oldCharacter = characterRepo.getById(id);
+			oldCharacter.setName(character.getName());
+			oldCharacter.setAge(character.getAge());
+			oldCharacter.setGenderIdentity(character.getGenderIdentity());
+			oldCharacter.setInventory(character.getInventory());
+			return this.toDTO(oldCharacter);
+		}
+		throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they were born anew on another adventure");
 	}
 	
-	// create character
-	public Character create(Character character) {
-		return characterRepo.save(character);
+	// delete character
+	public void deleteCharacter(int id) {
+		if (characterRepo.existsById(id)) {
+			characterRepo.deleteById(id);
+		}
+		throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they are trapped forever in a dungeon");
 	}
+	
 	
 }
