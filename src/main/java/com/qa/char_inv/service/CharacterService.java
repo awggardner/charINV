@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.qa.char_inv.data.dto.CharacterDTO;
 import com.qa.char_inv.data.dto.NewCharacterDTO;
 import com.qa.char_inv.data.entity.Character;
-import com.qa.char_inv.data.entity.Inventory;
 import com.qa.char_inv.data.repository.CharacterRepo;
 
 @Service
@@ -42,12 +41,7 @@ public class CharacterService {
 		return this.toDTO(newCharacter);
 	}
 	
-	// read all
-	public List<Character> readAll() {
-		return characterRepo.findAll();
-	}
-	
-	//
+
 	public List<CharacterDTO> getCharacters() {
 		List<Character> characters = characterRepo.findAll();
 		List<CharacterDTO> charactersDTO = new ArrayList<>();
@@ -67,12 +61,7 @@ public class CharacterService {
 		throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they are away on another adventure");
 	}
 	
-	// read inventory by character id
-//	public Inventory readInventoryByCharacterId(int id) {
-//		Character character = this.readById(id);
-//		return character.getInventory();
-//	}
-//	
+	
 
 	
 	// update character

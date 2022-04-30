@@ -1,8 +1,7 @@
 package com.qa.char_inv.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
@@ -40,23 +39,33 @@ public class InventoryService {
 	}
 	
 	
-	
-	public List<Inventory> readAll() {
-		return inventoryRepo.findAll();
+	// read all inventories
+	public List<InventoryDTO> getInventory() {
+		List<Inventory> inventories = inventoryRepo.findAll();
+		List<InventoryDTO> inventoriesDTO = new ArrayList<>();
+			for (Inventory inventory : inventories) {
+				inventoriesDTO.add(this.toDTO(inventory));
+			}
+			return inventoriesDTO;
 	}
 	
-	public Inventory readById(int id) {
-		Optional<Inventory> inventory = inventoryRepo.findById(id);
-		
-		if (inventory.isPresent()) {
-			return inventory.get();
+	// read inventory by character id
+	public List<InventoryDTO> getInventoryByCharacterId(int id) {
+		List<Inventory> characterInventory = inventoryRepo.findByCharacterId(id);
+		List<InventoryDTO> characterInventoryDTO = new ArrayList<>();
+			for (Inventory inventory: characterInventory) {
+				characterInventoryDTO.add(this.toDTO(inventory));
+				return characterInventoryDTO;
 		}
-		throw new EntityNotFoundException("Inventory with id " + id + " was not found");
+			throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they are away on another adventure");
 	}
 	
 
-	public Inventory create(Inventory inventory) {
-		return inventoryRepo.save(inventory);
+	// update inventory
+	public InventoryDTO updateInventory(NewInventoryDTO inventory, int id) {
+		return null;
+		
 	}
+
 	
 }
