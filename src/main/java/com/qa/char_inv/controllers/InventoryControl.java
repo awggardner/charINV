@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.char_inv.data.dto.InventoryDTO;
+import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.data.dto.NewInventoryDTO;
-import com.qa.char_inv.data.entity.Inventory;
 import com.qa.char_inv.service.CharacterService;
 import com.qa.char_inv.service.InventoryService;
 
 @RestController
-@RequestMapping(path = "/inventory") // accepts requests at localhost:8090/user
+@RequestMapping(path = "/inventory") // accepts requests at localhost:8090/inventory
 public class InventoryControl {
 	
 	private InventoryService inventoryService;
@@ -61,17 +61,9 @@ public class InventoryControl {
 	}
 	
 	
-	
-	
-	@PutMapping(path = "/{id}")
-	public ResponseEntity<Character> updateUser(@RequestBody Character character, @PathVariable(name = "id") int id) {
-		// TODO: Put your implementation here
-		return null;
-	}
-	
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> deleteCharacter(@PathVariable(name = "id") int id) {
-		// TODO: Put your implementation here
+	public ResponseEntity<?> deleteInventory(@PathVariable(name = "id") int id) {
+		
 		return null;
 	}
 }

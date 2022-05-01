@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.char_inv.data.dto.CharacterDTO;
-import com.qa.char_inv.data.dto.InventoryDTO;
 import com.qa.char_inv.data.dto.NewCharacterDTO;
 import com.qa.char_inv.service.CharacterService;
 
@@ -50,7 +49,7 @@ public class CharacterControl {
 	// read all characters
 			@GetMapping
 			public ResponseEntity<List<CharacterDTO>> getCharacter() {
-				return ResponseEntity.ok(characterService.getCharacter());
+				return ResponseEntity.ok(characterService.getCharacters());
 			}
 	
 	@PutMapping(path = "/{id}")

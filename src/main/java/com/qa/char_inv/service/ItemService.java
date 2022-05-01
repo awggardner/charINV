@@ -52,7 +52,7 @@ public class ItemService {
 		}
 		
 		// read by id
-		public ItemDTO getCharacter(int id) {
+		public ItemDTO getItem(int id) {
 			Optional<Item> item = itemRepo.findById(id);
 			
 			if (item.isPresent()) {
