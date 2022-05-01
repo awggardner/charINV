@@ -37,6 +37,8 @@ public class ItemDTO {
 	@ManyToMany(mappedBy = "items", fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Inventory> inventory;
+	
+	private Inventory itemInventory;
 
 	
 	//empty constructor
@@ -117,6 +119,16 @@ public class ItemDTO {
 	public void setInventory(List<Inventory> inventory) {
 		this.inventory = inventory;
 	}
+	
+	public void setItemInventory(Inventory itemInventory) {
+		this.itemInventory = itemInventory;
+	}
+	
+	public Inventory getItemInventory() {
+		return itemInventory;
+	}
+
+
 
 
 	@Override
@@ -124,6 +136,12 @@ public class ItemDTO {
 		return "Item [id=" + id + ", itemName=" + itemName + ", description=" + description + ", isMagic=" + isMagic
 				+ ", inventory=" + inventory + "]";
 	}
+
+
+
+
+
+
 	
 	
 	

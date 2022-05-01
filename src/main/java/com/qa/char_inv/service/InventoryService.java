@@ -60,16 +60,8 @@ public class InventoryService {
 			throw new EntityNotFoundException("We can't find this inventory...");
 	}
 	
-	// read inventory by character id
-	public List<InventoryDTO> getInventoryByCharacterId(int id) {
-		List<Inventory> characterInventory = inventoryRepo.findByCharacterId(id);
-		List<InventoryDTO> characterInventoryDTO = new ArrayList<>();
-			for (Inventory inventory: characterInventory) {
-				characterInventoryDTO.add(this.toDTO(inventory));
-				return characterInventoryDTO;
-		}
-			throw new EntityNotFoundException("We can't find this...");
-	}
+
+	
 	
 
 	// update inventory

@@ -62,8 +62,8 @@ public class CharacterControl {
 	@DeleteMapping(path = "/{id}")
 	// delete
 	public ResponseEntity<?> deleteCharacter(@PathVariable(name = "id") int id) {
-		CharacterDTO characterDeleted = characterService.getCharacter(id);
+		CharacterDTO dltCharacter = characterService.getCharacter(id);
 		characterService.deleteCharacter(id);
-		return ResponseEntity.ok(characterDeleted);
+		return ResponseEntity.ok(dltCharacter);
 	}
 }

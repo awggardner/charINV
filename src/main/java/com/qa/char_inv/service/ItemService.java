@@ -62,7 +62,7 @@ public class ItemService {
 		}
 		
 		// read by inventory id
-		public List<ItemDTO> getItemsByInventoryId(int id) {
+		public List<ItemDTO> getItemsByInvId(int id) {
 			List<Item> items = itemRepo.findByInventoryId(id);
 			List<ItemDTO> inventoryItems = new ArrayList<>();
 				for (Item item : items) {
