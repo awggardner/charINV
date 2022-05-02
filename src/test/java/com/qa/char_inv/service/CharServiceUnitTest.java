@@ -117,5 +117,38 @@ public class CharServiceUnitTest {
 		verify(modelMapper).map(character, CharacterDTO.class);
 	}
 	
+	@Test // update
+	public void testUpdate() {
+		Character character = mockchars.get(2);
+		int id = character.getId();
+		
+		NewCharacterDTO characterDTO = new NewCharacterDTO();
+		characterDTO.setName(character.getName());
+		characterDTO.setAge(character.getAge());
+		characterDTO.setGenderIdentity(character.getGenderIdentity());
+		characterDTO.setSpecies(character.getSpecies());
+		
+		CharacterDTO updatedChar = new CharacterDTO
+				(
+				 character.getId(),
+				 character.getName(),
+				 character.getAge(),
+				 character.getGenderIdentity(),
+				 character.getSpecies()
+				);
+		
+		when(characterRepo.existsById(id)).thenReturn(true);
+		when(characterRepo.getById(id)).thenReturn(character);
+		when(modelMapper.map(character,  CharacterDTO.class)).thenReturn(updatedChar);
+		
+		CharacterDTO actual = mockcharService.updateCharacter(characterDTO, id);
+		
+		assertEquals(updatedChar, actual);
+		verify(characterRepo).existsById(id);
+		verify(characterRepo).getById(id);
+		verify(modelMapper).map(character, CharacterDTO.class);
+		
+	}
+
 
 }
