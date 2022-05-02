@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.data.dto.CharacterDTO;
+import com.qa.char_inv.data.dto.NewCharacterDTO;
 import com.qa.char_inv.data.repository.CharacterRepo;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,7 +51,39 @@ public class CharServiceUnitTest {
 		
 	}
 	
-	@Test
+	@Test //create
+	public void createCharTest() {
+		Character character = mockchars.get(0);
+		
+		NewCharacterDTO newcharDTO = new NewCharacterDTO();
+		newcharDTO.setName(character.getName());
+		newcharDTO.setAge(character.getAge());
+		newcharDTO.setGenderIdentity(character.getGenderIdentity());
+		newcharDTO.setSpecies(character.getSpecies());
+		
+		CharacterDTO newMockchar = new CharacterDTO
+				(
+				 character.getName(),
+				 character.getAge(),
+				 character.getGenderIdentity(),
+				 character.getSpecies()
+				 );
+		
+		when(modelMapper.map(newcharDTO, Character.class)).thenReturn(character);
+		when(characterRepo.save(character)).thenReturn(character);
+		when(modelMapper.map(character, CharacterDTO.class)).thenReturn(newMockchar);
+		
+		CharacterDTO actual = mockcharService.createCharacter(newcharDTO);
+		
+		assertEquals(newMockchar, actual);
+		verify(modelMapper).map(newcharDTO, Character.class);
+		verify(characterRepo).save(character);
+		verify(modelMapper).map(character, CharacterDTO.class);
+		
+		
+	}
+	
+	@Test // read all
 	public void testReadAll() {
 		when(characterRepo.findAll()).thenReturn(mockchars);
 		when(modelMapper.map(mockchars.get(0), CharacterDTO.class)).thenReturn(mockcharDTOs.get(0));
@@ -68,7 +101,7 @@ public class CharServiceUnitTest {
 		verify(modelMapper).map(mockchars.get(3), CharacterDTO.class);
 	}
 	
-	@Test
+	@Test // read by id
 	public void testReadbyId() {
 		Character character = mockchars.get(3);
 		CharacterDTO mockcharDTO = mockcharDTOs.get(3);
@@ -83,4 +116,6 @@ public class CharServiceUnitTest {
 		verify(characterRepo).findById(id);
 		verify(modelMapper).map(character, CharacterDTO.class);
 	}
+	
+
 }
