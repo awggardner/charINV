@@ -52,7 +52,7 @@ public class CharServiceUnitTest {
 	}
 	
 	@Test //create
-	public void createCharTest() {
+	public void testCreate() {
 		Character character = mockchars.get(0);
 		
 		NewCharacterDTO newcharDTO = new NewCharacterDTO();
