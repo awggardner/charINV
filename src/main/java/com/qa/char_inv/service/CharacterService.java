@@ -81,6 +81,7 @@ public class CharacterService {
 	public void deleteCharacter(int id) {
 		if (characterRepo.existsById(id)) {
 			characterRepo.deleteById(id);
+			return;
 		}
 		throw new EntityNotFoundException("We can't find Character with id " + id + ", perhaps they are trapped forever in a dungeon");
 	}

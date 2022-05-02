@@ -149,6 +149,18 @@ public class CharServiceUnitTest {
 		verify(modelMapper).map(character, CharacterDTO.class);
 		
 	}
+	
+	@Test // delete
+	public void testDelete() {
+		int deleteId = 3;
+		when(characterRepo.existsById(deleteId)).thenReturn(true);
+		
+		mockcharService.deleteCharacter(deleteId);
+		
+		verify(characterRepo).existsById(deleteId);
+		
+		
+	}
 
 
 }
