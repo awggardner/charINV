@@ -79,6 +79,7 @@ public class InventoryService {
 	public void deleteInventory(int id) {
 		if (inventoryRepo.existsById(id)) {
 			inventoryRepo.deleteById(id);
+			return;
 		}
 		throw new EntityNotFoundException("We can't find Inventory with id " + id + ", perhaps it has been stolen by a sneaky thief!");
 	}

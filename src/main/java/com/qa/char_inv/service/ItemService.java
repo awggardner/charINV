@@ -89,6 +89,7 @@ public class ItemService {
 		public void deleteItem(int id) {
 			if (itemRepo.existsById(id)) {
 				itemRepo.deleteById(id);
+				return;
 			}
 			throw new EntityNotFoundException("We can't find Item with id " + id + ", perhaps it ran off");
 		}
