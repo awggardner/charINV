@@ -1,12 +1,18 @@
 package com.qa.char_inv.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.List;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import com.qa.char_inv.data.entity.Character;
 import com.qa.char_inv.data.dto.CharacterDTO;
 import com.qa.char_inv.data.repository.CharacterRepo;
@@ -17,8 +23,11 @@ public class CharServiceUnitTest {
 	@Mock
 	private CharacterRepo characterRepo;
 	
+	@Mock
+	private ModelMapper modelMapper;
+	
 	@InjectMocks
-	private CharacterService characterService;
+	private CharacterService mockcharService;
 	private List<Character> mockchars;
 	private List<CharacterDTO> mockcharDTOs;
 	
@@ -40,7 +49,23 @@ public class CharServiceUnitTest {
 		
 	}
 	
-	
+	@Test
+	public void testReadAll() {
+		when(characterRepo.findAll()).thenReturn(mockchars);
+		when(modelMapper.map(mockchars.get(0), CharacterDTO.class)).thenReturn(mockcharDTOs.get(0));
+		when(modelMapper.map(mockchars.get(1), CharacterDTO.class)).thenReturn(mockcharDTOs.get(1));
+		when(modelMapper.map(mockchars.get(2), CharacterDTO.class)).thenReturn(mockcharDTOs.get(2));
+		when(modelMapper.map(mockchars.get(3), CharacterDTO.class)).thenReturn(mockcharDTOs.get(3));
+		
+		List<CharacterDTO> actual = mockcharService.getCharacters();
+		
+		assertEquals(mockcharDTOs, actual);
+		verify(characterRepo).findAll();
+		verify(modelMapper).map(mockchars.get(0), CharacterDTO.class);
+		verify(modelMapper).map(mockchars.get(1), CharacterDTO.class);
+		verify(modelMapper).map(mockchars.get(2), CharacterDTO.class);
+		verify(modelMapper).map(mockchars.get(3), CharacterDTO.class);
+	}
 	
 	
 }
